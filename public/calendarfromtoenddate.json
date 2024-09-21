@@ -1,0 +1,23 @@
+[
+    {
+      "id": 1,
+      "title": "Python Developer Interview",
+      "date": "2024-09-05",
+      "time": "10:00 AM - 11:00 AM",
+      "interviewer": "Geetha"
+    },
+    {
+      "id": 2,
+      "title": "React Developer Interview",
+      "date": "2024-09-10",
+      "time": "2:00 PM - 3:00 PM",
+      "interviewer": "Geetha"
+    },
+    {
+      "id": 3,
+      "title": "Java Developer Interview",
+      "date": "2024-09-21",
+      "time": "10:00 AM - 11:00 AM",
+      "interviewer": "John"
+    }
+  ]
