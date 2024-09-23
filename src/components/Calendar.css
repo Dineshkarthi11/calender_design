@@ -1,4 +1,3 @@
-/* Calendar Container */
 .calendar {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -9,8 +8,7 @@
   max-width: 1000px;
   margin: 0 auto;
 }
-  
-/* Header (Days of the Week) */
+
 .header {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -21,16 +19,10 @@
   border-bottom: 1px solid #ddd;
 }
 
-.day-name {
-  font-size: 14px;
-  color: #666;
-}
-
-/* Body (Dates Grid) */
 .body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-auto-rows: 100px; /* Adjust the row height */
+  grid-auto-rows: 100px;
   gap: 1px;
   background-color: #ddd;
 }
@@ -41,11 +33,6 @@
   padding: 10px;
   border: 1px solid #ddd;
   cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.calendar-day:hover {
-  background-color: #f1f1f1;
 }
 
 .day-number {
@@ -54,7 +41,6 @@
   margin-bottom: 5px;
 }
 
-/* Event Style */
 .event {
   background-color: #1a73e8;
   color: white;
@@ -63,25 +49,4 @@
   font-size: 12px;
   margin-top: 5px;
   overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.event:hover {
-  background-color: #155ab6;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .calendar {
-    grid-template-rows: auto 1fr;
-  }
-
-  .header, .body {
-    grid-template-columns: repeat(7, 1fr);
-  }
-
-  .calendar-day {
-    padding: 8px;
-  }
 }
