@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from './components/Calendar';
 import EventPopup from './components/EventPopup';
+import EventDetailsPopup from './components/EventDetailsPopup';
 import CalendarService from './CalendarService';
 import Sidebar from './components/Sidebar';
 import './styles.css';
 
 const App = () => {
   const [events, setEvents] = useState([]);
-  const [popupData, setPopupData] = useState(null); // Popup state to hold event data for the clicked date
+  const [popupData, setPopupData] = useState(null); // State for showing job roles popup
+  const [detailedEvent, setDetailedEvent] = useState(null); // State for showing detailed event popup
 
   useEffect(() => {
     CalendarService.getCalendarEvents()
@@ -17,11 +19,21 @@ const App = () => {
 
   const handleDateClick = (date) => {
     const eventForTheDay = events.filter((event) => event.date === date);
-    setPopupData(eventForTheDay); // Open popup with the events for the clicked date
+    if (eventForTheDay.length > 0) {
+      setPopupData(eventForTheDay); // Show job roles in the popup
+    }
   };
 
   const closePopup = () => {
-    setPopupData(null); // Close the popup
+    setPopupData(null); // Close the first popup
+  };
+
+  const handleRoleClick = (event) => {
+    setDetailedEvent(event); // Open the detailed event popup
+  };
+
+  const closeDetailsPopup = () => {
+    setDetailedEvent(null); // Close the second popup
   };
 
   return (
@@ -30,7 +42,8 @@ const App = () => {
       <div className="main-content">
         <h1>September 2024 Calendar</h1>
         <Calendar events={events} onDateClick={handleDateClick} />
-        {popupData && <EventPopup events={popupData} onClose={closePopup} />} {/* Show popup when there's event data */}
+        {popupData && <EventPopup events={popupData} onClose={closePopup} onRoleClick={handleRoleClick} />} {/* First popup */}
+        {detailedEvent && <EventDetailsPopup event={detailedEvent} onClose={closeDetailsPopup} />} {/* Second popup */}
       </div>
     </div>
   );
