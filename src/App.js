@@ -8,8 +8,8 @@ import './styles.css';
 
 const App = () => {
   const [events, setEvents] = useState([]);
-  const [popupData, setPopupData] = useState(null); // State for showing job roles popup
-  const [detailedEvent, setDetailedEvent] = useState(null); // State for showing detailed event popup
+  const [popupData, setPopupData] = useState(null); // Data for the first popup
+  const [detailedEvents, setDetailedEvents] = useState(null); // Data for the second popup
 
   useEffect(() => {
     CalendarService.getCalendarEvents()
@@ -18,9 +18,9 @@ const App = () => {
   }, []);
 
   const handleDateClick = (date) => {
-    const eventForTheDay = events.filter((event) => event.date === date);
-    if (eventForTheDay.length > 0) {
-      setPopupData(eventForTheDay); // Show job roles in the popup
+    const eventsForTheDay = events.filter((event) => event.date === date);
+    if (eventsForTheDay.length > 0) {
+      setPopupData(eventsForTheDay); // Show the first popup
     }
   };
 
@@ -28,12 +28,13 @@ const App = () => {
     setPopupData(null); // Close the first popup
   };
 
-  const handleRoleClick = (event) => {
-    setDetailedEvent(event); // Open the detailed event popup
+  const handleRoleClick = () => {
+    setDetailedEvents(popupData); // Open the second popup with all events
+    setPopupData(null); // Close the first popup
   };
 
   const closeDetailsPopup = () => {
-    setDetailedEvent(null); // Close the second popup
+    setDetailedEvents(null); // Close the second popup
   };
 
   return (
@@ -42,8 +43,19 @@ const App = () => {
       <div className="main-content">
         <h1>September 2024 Calendar</h1>
         <Calendar events={events} onDateClick={handleDateClick} />
-        {popupData && <EventPopup events={popupData} onClose={closePopup} onRoleClick={handleRoleClick} />} {/* First popup */}
-        {detailedEvent && <EventDetailsPopup event={detailedEvent} onClose={closeDetailsPopup} />} {/* Second popup */}
+        {popupData && (
+          <EventPopup
+            events={popupData}
+            onClose={closePopup}
+            onRoleClick={handleRoleClick}
+          />
+        )}
+        {detailedEvents && (
+          <EventDetailsPopup
+            events={detailedEvents}
+            onClose={closeDetailsPopup}
+          />
+        )}
       </div>
     </div>
   );
