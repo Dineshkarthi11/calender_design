@@ -1,7 +1,7 @@
 import React from 'react';
 import './EventPopup.css'; // Styles for the popup
 
-const EventPopup = ({ events, onClose }) => {
+const EventPopup = ({ events, onClose, onRoleClick }) => {
   return (
     <div className="popup-overlay">
       <div className="popup-content">
@@ -9,9 +9,9 @@ const EventPopup = ({ events, onClose }) => {
         <ul>
           {events.map((event, index) => (
             <li key={index} className="event-item">
-              <strong>{event.title}</strong>
-              <p>{event.description}</p>
-              <p><em>{event.time}</em></p>
+              <button className="role-btn" onClick={() => onRoleClick(event)}>
+                {event.role}
+              </button> {/* Clicking on job role will show details */}
             </li>
           ))}
         </ul>
