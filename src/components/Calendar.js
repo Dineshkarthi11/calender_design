@@ -1,5 +1,5 @@
 import React from 'react';
-import './Calendar.css'; // Using a separate CSS file for more specific styles
+import './Calendar.css'; // Styles for the calendar component
 
 const Calendar = ({ events, onDateClick }) => {
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
